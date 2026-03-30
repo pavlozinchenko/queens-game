@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://queens.justpavlo.me/sitemap.xml

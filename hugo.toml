@@ -1,0 +1,28 @@
+baseURL = "/"
+title = "Queens Game"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+
+[params]
+  author = "Pavlo"
+  authorURL = "https://justpavlo.me"
+  githubURL = "https://github.com/pavlozinchenko/queens-game"
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+
+[languages]
+  [languages.en]
+    languageCode = "en"
+    languageName = "English"
+    weight = 1
+    contentDir = "content/en"
+  [languages.uk]
+    languageCode = "uk"
+    languageName = "Українська"
+    weight = 2
+    contentDir = "content/uk"

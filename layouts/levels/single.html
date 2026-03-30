@@ -1,0 +1,127 @@
+{{ define "main" }}
+<div class="game-container">
+  {{/* Row 1: prev | level info | next */}}
+  <div class="game-row-info">
+    {{ $prev := where (where .Site.RegularPages "Section" .Section) ".Params.level" "eq" (sub .Params.level 1) }}
+    {{ if $prev }}
+      {{ range $prev }}<a href="{{ .RelPermalink }}" class="btn btn-icon" title="Previous level">{{ end }}
+    {{ else }}
+      <span class="btn btn-icon disabled">
+    {{ end }}
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    {{ if $prev }}</a>{{ else }}</span>{{ end }}
+
+    <div class="game-info-center">
+      <span class="game-level">{{ .Title }}</span>
+      <span class="game-difficulty difficulty-{{ .Params.difficulty | lower }}">{{ i18n (.Params.difficulty | lower) }}</span>
+    </div>
+
+    {{ $next := where (where .Site.RegularPages "Section" .Section) ".Params.level" "eq" (add .Params.level 1) }}
+    {{ if $next }}
+      {{ range $next }}<a href="{{ .RelPermalink }}" class="btn btn-icon" title="Next level">{{ end }}
+    {{ else }}
+      <span class="btn btn-icon disabled">
+    {{ end }}
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    {{ if $next }}</a>{{ else }}</span>{{ end }}
+  </div>
+
+  {{/* Row 2: nav left, stats center, controls right */}}
+  <div class="game-row-controls">
+    <div class="game-nav">
+      <a href="{{ "/" | relLangURL }}#{{ .Section }}" class="btn btn-icon" title="Home">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
+      </a>
+      <button class="btn btn-icon" id="btn-random" title="Random level">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+      </button>
+    </div>
+    <div class="game-stats">
+      <span class="game-timer" id="timer">00:00</span>
+      <span class="game-separator">|</span>
+      <span class="game-moves" id="moves">{{ i18n "moves" 0 }}</span>
+    </div>
+    <div class="game-controls">
+      <button class="btn btn-icon" id="btn-undo" title="Undo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h10a5 5 0 0 1 5 5v0a5 5 0 0 1-5 5H3"/><path d="M7 6l-4 4 4 4"/></svg>
+      </button>
+      <button class="btn btn-icon" id="btn-restart" title="Restart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+      </button>
+    </div>
+  </div>
+
+  {{/* Level list for random navigation */}}
+  <script id="level-urls" type="application/json">
+    [{{ range $i, $p := (where .Site.RegularPages "Section" .Section).ByParam "level" }}{{ if $i }},{{ end }}{"level":{{ $p.Params.level }},"url":"{{ $p.RelPermalink }}"}{{ end }}]
+  </script>
+
+  {{/* Game board */}}
+  <div class="game-board" id="game-board"
+    data-grid="{{ .RawContent | htmlUnescape | plainify }}"
+    data-level="{{ .Params.level }}"
+    data-lang="{{ .Lang }}">
+  </div>
+
+  {{/* Bottom bar */}}
+  <div class="game-bottom-bar">
+    <button class="btn btn-icon" id="btn-how-to-play" title="{{ i18n "how-to-play-title" }}">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
+    </button>
+    <span class="controls-hint">{{ i18n "controls-hint" | safeHTML }}</span>
+    <button class="btn btn-icon" id="btn-settings" title="{{ i18n "settings-title" }}">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+  </div>
+</div>
+
+{{/* How to play modal */}}
+<div class="overlay" id="modal-overlay">
+  <div class="modal">
+    <h3>{{ i18n "how-to-play-title" }}</h3>
+    <ul>
+      <li>{{ i18n "rule-1" | safeHTML }}</li>
+      <li>{{ i18n "rule-2" | safeHTML }}</li>
+      <li>{{ i18n "rule-3" | safeHTML }}</li>
+      <li>{{ i18n "rule-4" | safeHTML }}</li>
+      <li>{{ i18n "rule-controls" | safeHTML }}</li>
+    </ul>
+    <button class="btn btn-primary" id="btn-close-modal">{{ i18n "got-it" }}</button>
+  </div>
+</div>
+
+{{/* Settings modal */}}
+<div class="overlay" id="settings-overlay">
+  <div class="modal">
+    <h3>{{ i18n "settings-title" }}</h3>
+    <div class="settings-list">
+      <label class="settings-item">
+        <span>{{ i18n "hide-timer" }}</span>
+        <input type="checkbox" id="setting-hide-timer">
+      </label>
+      <label class="settings-item">
+        <span>{{ i18n "hide-moves" }}</span>
+        <input type="checkbox" id="setting-hide-moves">
+      </label>
+    </div>
+    <p class="settings-hint">{{ i18n "settings-hint" }}</p>
+    <button class="btn btn-primary" id="btn-close-settings">{{ i18n "done" }}</button>
+  </div>
+</div>
+
+{{/* Win overlay */}}
+<div class="overlay" id="win-overlay">
+  <div class="win-modal">
+    <h2>{{ i18n "you-won" }}</h2>
+    <p>{{ .Title }} {{ i18n "completed-in" }} <span id="win-time"></span></p>
+    {{ with (where (where .Site.RegularPages "Section" .Section) ".Params.level" "eq" (add .Params.level 1)) }}
+      {{ range . }}
+        <a href="{{ .RelPermalink }}" class="btn btn-primary">{{ i18n "next-level" }}</a>
+      {{ end }}
+    {{ else }}
+      <a href="{{ "/" | relLangURL }}" class="btn btn-primary">{{ i18n "back-to-levels" }}</a>
+    {{ end }}
+    <button class="btn btn-secondary" id="btn-replay">{{ i18n "play-again" }}</button>
+  </div>
+</div>
+{{ end }}

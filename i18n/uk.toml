@@ -1,0 +1,92 @@
+[nav-levels]
+other = "Рівні"
+
+[choose-level]
+other = "Обери рівень"
+
+[level]
+other = "Рівень"
+
+[easy]
+other = "Легко"
+
+[medium]
+other = "Середньо"
+
+[hard]
+other = "Складно"
+
+[moves]
+one = "{{ .Count }} хід"
+few = "{{ .Count }} ходи"
+many = "{{ .Count }} ходів"
+other = "{{ .Count }} ходів"
+
+[how-to-play-title]
+other = "Як грати"
+
+[rule-1]
+other = "Постав рівно <strong>одну королеву</strong> в кожен кольоровий регіон."
+
+[rule-2]
+other = "Дві королеви не можуть бути в <strong>одному рядку</strong>."
+
+[rule-3]
+other = "Дві королеви не можуть бути в <strong>одному стовпці</strong>."
+
+[rule-4]
+other = "Дві королеви не можуть бути <strong>сусідніми</strong> (включно по діагоналі)."
+
+[got-it]
+other = "Зрозуміло!"
+
+[settings-title]
+other = "Налаштування"
+
+[hide-timer]
+other = "Сховати таймер"
+
+[hide-moves]
+other = "Сховати кількість ходів"
+
+[settings-hint]
+other = "Налаштування зберігаються у браузері."
+
+[done]
+other = "Готово"
+
+[you-won]
+other = "Перемога!"
+
+[completed-in]
+other = "пройдено за"
+
+[next-level]
+other = "Наступний рівень"
+
+[back-to-levels]
+other = "До списку рівнів"
+
+[play-again]
+other = "Грати знову"
+
+[controls-hint]
+other = "Лівий клік — хрест<br>Правий клік — королева"
+
+[rule-controls]
+other = "<strong>ПК:</strong> ліва кнопка миші — хрест (мітка), права — королева. <strong>Телефон:</strong> тап по колу: хрест → королева → пусто."
+
+[tab-general]
+other = "Загальні"
+
+[tab-themed]
+other = "Тематичні"
+
+[site-description]
+other = "Розмісти королев на кольоровій сітці так, щоб жодні дві не були в одному рядку, стовпці чи поруч по діагоналі."
+
+[footer-line1]
+other = "Зробив <strong>Павло Зінченко</strong>"
+
+[footer-line2]
+other = "Познайомитись на"
