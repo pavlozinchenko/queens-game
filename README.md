@@ -71,6 +71,10 @@ hugo server
 
 Cloudflare Pages. Build command: `hugo`, output directory: `public`.
 
+## Contributing
+
+Contributions are welcome! Feel free to open a PR with new levels, bug fixes, or improvements.
+
 ## License
 
 [MIT](LICENSE)
