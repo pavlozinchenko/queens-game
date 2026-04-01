@@ -1,13 +1,11 @@
 ---
 title: "Level 14"
 level: 14
-gridSize: 8
+gridSize: 6
 ---
-aabbbbbc
-adddbbbc
-ddddbbcc
-dddddddc
-edddcccc
-edddgccf
-eedggcff
-gggghhhf
+aaaaab
+aaaaab
+aacaab
+accddb
+ecccdb
+eccfdd

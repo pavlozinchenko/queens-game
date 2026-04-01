@@ -1,13 +1,11 @@
 ---
 title: "Level 13"
 level: 13
-gridSize: 8
+gridSize: 6
 ---
-ccaaaaaa
-bcccccaa
-ecccaaaa
-eeccadaa
-eeccccaa
-eehfcchg
-hhhhhhhg
-hhhhhhhh
+aaabbb
+accbbb
+acbbbb
+ccddbe
+ccfdee
+ccfffe

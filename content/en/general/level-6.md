@@ -1,12 +1,10 @@
 ---
 title: "Level 6"
 level: 6
-gridSize: 7
+gridSize: 5
 ---
-aaaaabb
-cccdfbb
-cecdfff
-cecdfff
-eefdfff
-egfffff
-egggfff
+aaacc
+bbacc
+dcccc
+dddec
+ddeec

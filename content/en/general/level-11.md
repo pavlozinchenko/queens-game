@@ -1,13 +1,10 @@
 ---
 title: "Level 11"
 level: 11
-gridSize: 8
+gridSize: 5
 ---
-ccaaaccc
-cccaccbb
-cccacccc
-eccacccd
-eccccccc
-eefcgccg
-eeecgggg
-eeehhhhh
+baaaa
+bbaaa
+bdcca
+dddca
+dddee

@@ -1,12 +1,10 @@
 ---
 title: "Level 9"
 level: 9
-gridSize: 7
+gridSize: 5
 ---
-ebbbbac
-eebccac
-ebbcccc
-edddfff
-eddffff
-gffffff
-gggffff
+bbaaa
+bbbaa
+bbdac
+bbddc
+ebbdc

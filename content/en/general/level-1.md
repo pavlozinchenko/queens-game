@@ -1,10 +1,9 @@
 ---
 title: "Level 1"
 level: 1
-gridSize: 5
+gridSize: 4
 ---
-aaabb
-acaab
-dcccb
-ddcbb
-deeee
+aabb
+cabb
+ccdb
+cddd

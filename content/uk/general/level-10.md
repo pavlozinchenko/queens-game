@@ -1,12 +1,10 @@
 ---
 title: "Level 10"
 level: 10
-gridSize: 7
+gridSize: 5
 ---
-acccccc
-aaadbcc
-ddddeec
-dddfeec
-gggfeee
-gggfffe
-ggggfff
+caaab
+cbbbb
+ccdbb
+ccddb
+cddde

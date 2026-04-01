@@ -1,10 +1,9 @@
 ---
 title: "Level 2"
 level: 2
-gridSize: 5
+gridSize: 4
 ---
-aaacc
-bbacc
-dcccc
-dddec
-ddeec
+bbac
+bbac
+bdcc
+dddc

@@ -1,13 +1,11 @@
 ---
 title: "Level 15"
 level: 15
-gridSize: 8
+gridSize: 6
 ---
-bbbbbbac
-bbbbeeac
-bbbeecac
-dbeeeccc
-hheeeeec
-hhffeccc
-hhfeecgg
-hheeeeee
+baaaad
+baaaad
+bbcadd
+eecddf
+eedddf
+eddfff

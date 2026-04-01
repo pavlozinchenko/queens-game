@@ -1,10 +1,9 @@
 ---
 title: "Level 3"
 level: 3
-gridSize: 5
+gridSize: 4
 ---
-aaabb
-abbbb
-cbbdb
-cdddb
-cddee
+baaa
+bbac
+dbac
+dddc

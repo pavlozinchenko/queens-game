@@ -1,11 +1,10 @@
 ---
 title: "Level 8"
 level: 8
-gridSize: 6
+gridSize: 5
 ---
-bbccca
-bccccc
-ccdccc
-dddcce
-dffeee
-ffffee
+aaabb
+aabbb
+caabb
+cddde
+cdeee
