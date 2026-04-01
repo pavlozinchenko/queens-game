@@ -246,6 +246,26 @@
   cursor: pointer;
 }
 
+.btn-reset-progress {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  background: none;
+  border: 1px solid rgb(200, 40, 40);
+  border-radius: var(--radius);
+  color: rgb(200, 40, 40);
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.btn-reset-progress:hover {
+  background: rgb(200, 40, 40);
+  color: #fff;
+}
+
 .settings-hint {
   font-size: 0.75rem;
   color: var(--color-text-muted);

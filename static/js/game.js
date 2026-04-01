@@ -275,6 +275,15 @@
     gameWon = true;
     stopTimer();
 
+    // Save progress
+    var levelKey = boardEl.dataset.level;
+    var progress = JSON.parse(localStorage.getItem("qs-progress") || "{}");
+    var prev = progress[levelKey];
+    if (!prev || timerSeconds < prev.time || (timerSeconds === prev.time && moveCount < prev.moves)) {
+      progress[levelKey] = { time: timerSeconds, moves: moveCount };
+      localStorage.setItem("qs-progress", JSON.stringify(progress));
+    }
+
     document.getElementById("win-time").textContent = formatTime(timerSeconds);
     document.getElementById("win-overlay").classList.add("active");
   }
@@ -320,6 +329,12 @@
 
   bindModal("btn-how-to-play", "modal-overlay", "btn-close-modal");
   bindModal("btn-settings", "settings-overlay", "btn-close-settings");
+
+  // === Reset Progress ===
+  document.getElementById("btn-reset-progress").addEventListener("click", () => {
+    localStorage.removeItem("qs-progress");
+    document.getElementById("btn-reset-progress").textContent = "✓";
+  });
 
   // === Random Level ===
   document.getElementById("btn-random").addEventListener("click", () => {

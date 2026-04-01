@@ -10,9 +10,10 @@
   <div class="tab-content active" id="tab-general">
     <div class="level-grid">
       {{ range (where .Site.RegularPages "Section" "general").ByParam "level" }}
-      <a href="{{ .RelPermalink }}" class="level-card">
+      <a href="{{ .RelPermalink }}" class="level-card" data-level="{{ .Params.level }}">
         <span class="level-number">{{ .Params.level }}</span>
         <span class="level-size">{{ .Params.gridSize }}x{{ .Params.gridSize }}</span>
+        <span class="level-progress"></span>
       </a>
       {{ end }}
     </div>
@@ -21,9 +22,10 @@
   <div class="tab-content" id="tab-themed">
     <div class="level-grid">
       {{ range (where .Site.RegularPages "Section" "themed").ByParam "level" }}
-      <a href="{{ .RelPermalink }}" class="level-card level-card-themed">
+      <a href="{{ .RelPermalink }}" class="level-card level-card-themed" data-level="{{ .Params.level }}">
         <span class="level-name">{{ .Title }}</span>
         <span class="level-size">{{ .Params.gridSize }}x{{ .Params.gridSize }}</span>
+        <span class="level-progress"></span>
       </a>
       {{ end }}
     </div>
@@ -57,6 +59,20 @@
   if (hash === "general" || hash === "themed") {
     activateTab(hash);
   }
+
+  // Show progress on level cards
+  var progress = JSON.parse(localStorage.getItem("qs-progress") || "{}");
+  document.querySelectorAll(".level-card[data-level]").forEach(function(card) {
+    var data = progress[card.dataset.level];
+    if (!data) return;
+    card.classList.add("completed");
+    var el = card.querySelector(".level-progress");
+    if (el) {
+      var m = String(Math.floor(data.time / 60)).padStart(2, "0");
+      var s = String(data.time % 60).padStart(2, "0");
+      el.textContent = m + ":" + s + " · " + data.moves;
+    }
+  });
 })();
 </script>
 {{ end }}
