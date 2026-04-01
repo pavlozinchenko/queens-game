@@ -1,7 +1,6 @@
 ---
 title: "Квадрати"
 level: 101
-difficulty: "Easy"
 gridSize: 6
 ---
 aaaaaa

@@ -1,7 +1,6 @@
 ---
 title: "Love"
 level: 104
-difficulty: "Easy"
 gridSize: 8
 ---
 aaaaaaa

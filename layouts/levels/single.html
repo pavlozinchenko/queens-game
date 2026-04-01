@@ -13,7 +13,7 @@
 
     <div class="game-info-center">
       <span class="game-level">{{ .Title }}</span>
-      <span class="game-difficulty difficulty-{{ .Params.difficulty | lower }}">{{ i18n (.Params.difficulty | lower) }}</span>
+      <span class="game-size">{{ .Params.gridSize }}x{{ .Params.gridSize }}</span>
     </div>
 
     {{ $next := where (where .Site.RegularPages "Section" .Section) ".Params.level" "eq" (add .Params.level 1) }}

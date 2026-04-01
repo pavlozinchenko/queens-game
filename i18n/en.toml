@@ -7,15 +7,6 @@ other = "Choose a Level"
 [level]
 other = "Level"
 
-[easy]
-other = "Easy"
-
-[medium]
-other = "Medium"
-
-[hard]
-other = "Hard"
-
 [moves]
 one = "{{ .Count }} move"
 other = "{{ .Count }} moves"

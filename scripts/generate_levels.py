@@ -18,16 +18,10 @@ import string
 import time
 from collections import deque
 
-DIFFICULTY_SIZES = {
-    "easy": [4, 5],
+SIZE_PRESETS = {
+    "small": [4, 5],
     "medium": [6, 7],
-    "hard": [8, 9],
-}
-
-DIFFICULTY_LABELS = {
-    4: "Easy", 5: "Easy",
-    6: "Medium", 7: "Medium",
-    8: "Hard", 9: "Hard",
+    "large": [8, 9],
 }
 
 
@@ -299,27 +293,25 @@ def grid_to_string(grid):
 def main():
     parser = argparse.ArgumentParser(
         description="Queens Game level generator",
-        usage="%(prog)s (easy|medium|hard | --size N)",
+        usage="%(prog)s (small|medium|large | --size N)",
     )
-    parser.add_argument("difficulty", nargs="?",
-                        choices=["easy", "medium", "hard"],
-                        help="Difficulty preset")
+    parser.add_argument("preset", nargs="?",
+                        choices=["small", "medium", "large"],
+                        help="Size preset: small (4-5), medium (6-7), large (8-9)")
     parser.add_argument("--size", type=int,
-                        help="Exact grid size (overrides difficulty)")
+                        help="Exact grid size (overrides preset)")
     args = parser.parse_args()
 
     if args.size:
         sizes = [args.size]
-        difficulty = DIFFICULTY_LABELS.get(args.size, "Medium")
-    elif args.difficulty:
-        sizes = DIFFICULTY_SIZES[args.difficulty]
-        difficulty = args.difficulty.capitalize()
+    elif args.preset:
+        sizes = SIZE_PRESETS[args.preset]
     else:
-        parser.error("Provide difficulty (easy/medium/hard) or --size N")
+        parser.error("Provide preset (small/medium/large) or --size N")
 
     n = random.choice(sizes)
 
-    print(f"Generating {difficulty} ({n}x{n})...\n", file=sys.stderr, flush=True)
+    print(f"Generating {n}x{n}...\n", file=sys.stderr, flush=True)
 
     t0 = time.time()
     grid = generate_level(n)
@@ -330,7 +322,7 @@ def main():
         sys.exit(1)
 
     grid_str = grid_to_string(grid)
-    print(f"\n✓ {n}x{n} {difficulty} — {elapsed:.1f}s", file=sys.stderr)
+    print(f"\n✓ {n}x{n} — {elapsed:.1f}s", file=sys.stderr)
 
     # Output grid to stdout
     print(grid_str)

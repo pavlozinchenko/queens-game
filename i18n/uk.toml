@@ -7,15 +7,6 @@ other = "Обери рівень"
 [level]
 other = "Рівень"
 
-[easy]
-other = "Легко"
-
-[medium]
-other = "Середньо"
-
-[hard]
-other = "Складно"
-
 [moves]
 one = "{{ .Count }} хід"
 few = "{{ .Count }} ходи"

@@ -1,7 +1,6 @@
 ---
 title: "Level 11"
 level: 11
-difficulty: "Hard"
 gridSize: 8
 ---
 ccaaaccc

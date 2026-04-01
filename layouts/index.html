@@ -12,7 +12,6 @@
       {{ range (where .Site.RegularPages "Section" "general").ByParam "level" }}
       <a href="{{ .RelPermalink }}" class="level-card">
         <span class="level-number">{{ .Params.level }}</span>
-        <span class="level-difficulty difficulty-{{ .Params.difficulty | lower }}">{{ i18n (.Params.difficulty | lower) }}</span>
         <span class="level-size">{{ .Params.gridSize }}x{{ .Params.gridSize }}</span>
       </a>
       {{ end }}
@@ -24,7 +23,6 @@
       {{ range (where .Site.RegularPages "Section" "themed").ByParam "level" }}
       <a href="{{ .RelPermalink }}" class="level-card level-card-themed">
         <span class="level-name">{{ .Title }}</span>
-        <span class="level-difficulty difficulty-{{ .Params.difficulty | lower }}">{{ i18n (.Params.difficulty | lower) }}</span>
         <span class="level-size">{{ .Params.gridSize }}x{{ .Params.gridSize }}</span>
       </a>
       {{ end }}

@@ -31,13 +31,11 @@ def main():
 
     rows = grid.split("\n")
     grid_size = len(rows)
-    difficulty = "Easy" if grid_size <= 5 else "Medium" if grid_size <= 7 else "Hard"
 
     content = "\n".join([
         "---",
         f'title: "Level {args.level}"',
         f"level: {args.level}",
-        f'difficulty: "{difficulty}"',
         f"gridSize: {grid_size}",
         "---",
         grid,
@@ -57,7 +55,7 @@ def main():
         with open(filepath, "w") as f:
             f.write(content)
 
-    print(f"Saved level {args.level} ({grid_size}x{grid_size} {difficulty}) "
+    print(f"Saved level {args.level} ({grid_size}x{grid_size}) "
           f"to content/{{en,uk}}/{args.category}/level-{args.level}.md")
 
 

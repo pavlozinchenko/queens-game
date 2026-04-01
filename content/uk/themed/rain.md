@@ -1,7 +1,6 @@
 ---
 title: "Дощ"
 level: 103
-difficulty: "Easy"
 gridSize: 8
 ---
 aaaaaaaa
