@@ -28,6 +28,28 @@
 
   const lang = boardEl.dataset.lang || "en";
 
+  // === Progress persistence (localStorage + cookie fallback) ===
+  function loadProgress() {
+    try {
+      var data = localStorage.getItem("qs-progress");
+      if (data) return JSON.parse(data);
+    } catch (_) {}
+    // Cookie fallback
+    var match = document.cookie.match(/(?:^|; )qs-progress=([^;]*)/);
+    if (match) {
+      try { return JSON.parse(decodeURIComponent(match[1])); } catch (_) {}
+    }
+    return {};
+  }
+
+  function saveProgress(progress) {
+    var json = JSON.stringify(progress);
+    try { localStorage.setItem("qs-progress", json); } catch (_) {}
+    // Cookie fallback (expires in 10 years)
+    document.cookie = "qs-progress=" + encodeURIComponent(json) +
+      ";path=/;max-age=315360000;SameSite=Lax";
+  }
+
   // === Parse grid ===
   const rawGrid = boardEl.dataset.grid.trim();
   const rows = rawGrid.split("\n").map((r) => r.trim()).filter((r) => r.length > 0);
@@ -275,13 +297,13 @@
     gameWon = true;
     stopTimer();
 
-    // Save progress
+    // Save progress (localStorage + cookie fallback)
     var levelKey = boardEl.dataset.level;
-    var progress = JSON.parse(localStorage.getItem("qs-progress") || "{}");
+    var progress = loadProgress();
     var prev = progress[levelKey];
     if (!prev || timerSeconds < prev.time || (timerSeconds === prev.time && moveCount < prev.moves)) {
       progress[levelKey] = { time: timerSeconds, moves: moveCount };
-      localStorage.setItem("qs-progress", JSON.stringify(progress));
+      saveProgress(progress);
     }
 
     document.getElementById("win-time").textContent = formatTime(timerSeconds);
@@ -335,7 +357,7 @@
   var resetLabel = resetBtn.textContent;
 
   function updateResetBtn() {
-    var has = Object.keys(JSON.parse(localStorage.getItem("qs-progress") || "{}")).length > 0;
+    var has = Object.keys(loadProgress()).length > 0;
     resetBtn.disabled = !has;
     resetBtn.classList.toggle("disabled", !has);
   }
@@ -343,7 +365,8 @@
 
   resetBtn.addEventListener("click", () => {
     if (resetBtn.disabled) return;
-    localStorage.removeItem("qs-progress");
+    try { localStorage.removeItem("qs-progress"); } catch (_) {}
+    document.cookie = "qs-progress=;path=/;max-age=0";
     resetBtn.textContent = resetBtn.dataset.done;
     resetBtn.disabled = true;
     resetBtn.classList.add("disabled");

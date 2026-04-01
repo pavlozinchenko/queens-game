@@ -61,7 +61,15 @@
   }
 
   // Show progress on level cards
-  var progress = JSON.parse(localStorage.getItem("qs-progress") || "{}");
+  var progress = {};
+  try {
+    var data = localStorage.getItem("qs-progress");
+    if (data) progress = JSON.parse(data);
+  } catch (_) {}
+  if (!Object.keys(progress).length) {
+    var match = document.cookie.match(/(?:^|; )qs-progress=([^;]*)/);
+    if (match) try { progress = JSON.parse(decodeURIComponent(match[1])); } catch (_) {}
+  }
   document.querySelectorAll(".level-card[data-level]").forEach(function(card) {
     var data = progress[card.dataset.level];
     if (!data) return;
