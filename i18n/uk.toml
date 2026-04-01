@@ -46,6 +46,9 @@ other = "Налаштування зберігаються у браузері."
 [reset-progress]
 other = "Скинути прогрес усіх рівнів"
 
+[reset-progress-done]
+other = "Видалено"
+
 [done]
 other = "Готово"
 

@@ -192,7 +192,7 @@
     cellStates[row][col] = newState;
     updateMovesDisplay();
     renderBoard();
-    if (newState === QUEEN) checkWin();
+    checkWin();
   }
 
   function onCellCycle(row, col) {
@@ -331,9 +331,23 @@
   bindModal("btn-settings", "settings-overlay", "btn-close-settings");
 
   // === Reset Progress ===
-  document.getElementById("btn-reset-progress").addEventListener("click", () => {
+  var resetBtn = document.getElementById("btn-reset-progress");
+  var resetLabel = resetBtn.textContent;
+
+  function updateResetBtn() {
+    var has = Object.keys(JSON.parse(localStorage.getItem("qs-progress") || "{}")).length > 0;
+    resetBtn.disabled = !has;
+    resetBtn.classList.toggle("disabled", !has);
+  }
+  updateResetBtn();
+
+  resetBtn.addEventListener("click", () => {
+    if (resetBtn.disabled) return;
     localStorage.removeItem("qs-progress");
-    document.getElementById("btn-reset-progress").textContent = "✓";
+    resetBtn.textContent = resetBtn.dataset.done;
+    resetBtn.disabled = true;
+    resetBtn.classList.add("disabled");
+    setTimeout(() => { resetBtn.textContent = resetLabel; }, 3000);
   });
 
   // === Random Level ===

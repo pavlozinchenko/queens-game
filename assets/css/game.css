@@ -261,9 +261,16 @@
   transition: background var(--transition-fast), color var(--transition-fast);
 }
 
-.btn-reset-progress:hover {
+.btn-reset-progress:hover:not(.disabled) {
   background: rgb(200, 40, 40);
   color: #fff;
+}
+
+.btn-reset-progress.disabled {
+  opacity: 0.3;
+  cursor: default;
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
 }
 
 .settings-hint {

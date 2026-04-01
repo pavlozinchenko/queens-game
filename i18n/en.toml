@@ -44,6 +44,9 @@ other = "Settings are saved in your browser."
 [reset-progress]
 other = "Reset progress for all levels"
 
+[reset-progress-done]
+other = "Cleared"
+
 [done]
 other = "Done"
 
