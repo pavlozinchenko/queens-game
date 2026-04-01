@@ -8,55 +8,57 @@ A web-based puzzle game inspired by LinkedIn's Queens mini-game. Place queens on
 - Place exactly **one queen** in each colored region
 - No two queens can be in the **same row** or **column**
 - No two queens can be **adjacent** (including diagonally)
-- **Desktop:** left click to place a cross (mark), right click to place a queen
-- **Mobile:** tap to cycle: cross, queen, clear
+- **Desktop:** left click — cross (mark), right click — queen
+- **Mobile:** tap to cycle: cross → queen → clear
 
 ## Features
 
-- 15 levels: Easy (4-5), Medium (6-7), Hard (8-8)
-- Dark/light theme with toggle
-- English/Ukrainian localization (Hugo i18n)
-- Timer and move counter (can be hidden in settings)
-- Undo/restart, prev/next level navigation
-- General and themed level categories
-- Unique solution guaranteed for every level
+- 36 general levels (4x4 → 8x8) + themed levels
+- Dark/light theme
+- English/Ukrainian localization
+- Timer and move counter (hideable in settings)
+- Progress tracking — best time and moves saved per level
+- Undo/restart, prev/next/random level navigation
+- Every level has a unique solution
 
 ## Tech Stack
 
 - [Hugo](https://gohugo.io/) — static site generator
 - Vanilla JS — game logic
-- CSS — styling, no frameworks
-- Python — level generator script
+- CSS (5 modules via Hugo Pipes) — styling, no frameworks
+- Python — level generator
 
 ## Project Structure
 
 ```
-content/
-  en/                    # English content
-    general/             # General levels (numbered)
-    themed/              # Themed levels (named)
-  uk/                    # Ukrainian content (same structure)
-i18n/                    # Translation files (en.toml, uk.toml)
-layouts/                 # Hugo templates
-  levels/single.html     # Level page template
-  index.html             # Level selector with tabs
-assets/css/style.css     # All styles
-static/js/game.js        # Game logic
+content/{en,uk}/
+  general/             # General levels (numbered)
+  themed/              # Themed levels (named)
+i18n/                  # Translations (en.toml, uk.toml)
+layouts/
+  levels/single.html   # Level page template
+  index.html           # Level selector with tabs
+assets/css/
+  variables.css        # Themes and CSS custom properties
+  base.css             # Reset, buttons, overlays
+  layout.css           # Header, footer, toggles
+  levels.css           # Level selector, cards, progress
+  game.css             # Board, cells, modals
+static/js/game.js      # Game logic
 scripts/
-  generate_levels.py     # Level generator
-  save_level.py          # Save generated level to content files
+  generate_levels.py   # Level generator
+  save_level.py        # Save generated level to content files
 ```
 
 ## Level Generation
 
 ```bash
-# Generate a level and save it
-python3 scripts/generate_levels.py easy | python3 scripts/save_level.py --level 1
-python3 scripts/generate_levels.py medium | python3 scripts/save_level.py --level 6
-python3 scripts/generate_levels.py --size 8 | python3 scripts/save_level.py --level 11
+# Generate and save a level
+python3 scripts/generate_levels.py --size 5 | python3 scripts/save_level.py --level 1
+python3 scripts/generate_levels.py --size 8 | python3 scripts/save_level.py --level 30
 
-# Overwrite existing level
-python3 scripts/generate_levels.py easy | python3 scripts/save_level.py --level 1 --force
+# Overwrite existing
+python3 scripts/generate_levels.py --size 7 | python3 scripts/save_level.py --level 21 --force
 ```
 
 ## Development
@@ -67,7 +69,11 @@ hugo server
 
 ## Deploy
 
-Built for Cloudflare Pages. Build command: `hugo`, output directory: `public`.
+Cloudflare Pages. Build command: `hugo`, output directory: `public`.
+
+## License
+
+[MIT](LICENSE)
 
 ## Author
 

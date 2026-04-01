@@ -3,12 +3,11 @@
 Queens Game — level generator.
 
 Usage:
-  python generate_levels.py easy            # 1 easy level (4-5)
-  python generate_levels.py medium          # 1 medium level (6-7)
-  python generate_levels.py hard            # 1 hard level (8-9)
-  python generate_levels.py --size 6        # 1 level of size 6x6
+  python generate_levels.py 5              # generate 5x5 level
+  python generate_levels.py 8              # generate 8x8 level
+  python generate_levels.py 5 | python save_level.py --level 1
 
-Outputs the grid to stdout. Save manually to content files.
+Outputs the grid to stdout.
 """
 
 import argparse
@@ -17,12 +16,6 @@ import sys
 import string
 import time
 from collections import deque
-
-SIZE_PRESETS = {
-    "small": [4, 5],
-    "medium": [6, 7],
-    "large": [8, 9],
-}
 
 
 def find_placement(n):
@@ -291,25 +284,11 @@ def grid_to_string(grid):
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Queens Game level generator",
-        usage="%(prog)s (small|medium|large | --size N)",
-    )
-    parser.add_argument("preset", nargs="?",
-                        choices=["small", "medium", "large"],
-                        help="Size preset: small (4-5), medium (6-7), large (8-9)")
-    parser.add_argument("--size", type=int,
-                        help="Exact grid size (overrides preset)")
+    parser = argparse.ArgumentParser(description="Queens Game level generator")
+    parser.add_argument("size", type=int, help="Grid size (e.g. 5 for 5x5)")
     args = parser.parse_args()
 
-    if args.size:
-        sizes = [args.size]
-    elif args.preset:
-        sizes = SIZE_PRESETS[args.preset]
-    else:
-        parser.error("Provide preset (small/medium/large) or --size N")
-
-    n = random.choice(sizes)
+    n = args.size
 
     print(f"Generating {n}x{n}...\n", file=sys.stderr, flush=True)
 
