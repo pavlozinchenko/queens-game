@@ -3,7 +3,7 @@
 Not read at session start. Pulled from when `docs/PROJECT.md` → Next tasks has room. No size limit.
 
 Order: first by *when* (the sections below), then by priority inside a section (H → M → L).
-Priority meanings: `~/Claude/playbook/06-priorities.md`.
+Priority meanings: `<kit>/playbook/06-priorities.md`.
 
 ## Next (first candidates for Next tasks)
 - [M] (How to Play) 3-step illustrated example instead of a bullet list

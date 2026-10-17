@@ -46,4 +46,4 @@ Other questions: `docs/QUESTIONS.md`.
 Read this file, then `docs/journal/` newest entry, then `AGENTS.md`. Run the `start-session` skill.
 
 ## Process
-This product follows the personal playbook (`~/Claude/playbook/`): sessions start by reading this file, work in small approved steps, and end by updating **Status** and **Next tasks** and adding a journal entry. Decisions go to `docs/decisions/`.
+This product follows the project kit: sessions start by reading this file, work in small approved steps, and end by updating **Status** and **Next tasks** and adding a journal entry. Decisions go to `docs/decisions/`.
