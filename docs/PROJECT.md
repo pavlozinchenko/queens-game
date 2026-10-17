@@ -21,12 +21,11 @@ Healthy when:
 - No unused i18n keys; both languages render every string.
 
 ## Status (2026-10-17)
-Live and stable: 36 general + 5 themed levels, EN/UK, dark/light theme, timer, undo, saved progress with cookie fallback. Last code change 2026-04-01. Adopted into the playbook today; `hugo` builds clean; no task started.
+Live and stable: 36 general + 5 themed levels, EN/UK, dark/light theme, timer, undo, saved progress with cookie fallback. Last code change 2026-04-01. Adopted into the project kit and committed 2026-10-17; `hugo` builds clean; no task started.
 
 ## Next tasks
 | Task | Done when | Priority | Status | Updated |
 |------|-----------|----------|--------|---------|
-| Commit the adoption | `AGENTS.md`, `CLAUDE.md`, `docs/`, `.gitignore` committed | H | planned | 2026-10-17 |
 | Clearer "How to Play" | rules page rewritten and understood by a first-time player | H | planned | 2026-10-17 |
 | Win celebration | win modal replaced by a short celebration that works on mobile | M | planned | 2026-10-17 |
 | Hint button | hint highlights a safe cell or region, with a counter, in both languages | M | planned | 2026-10-17 |
